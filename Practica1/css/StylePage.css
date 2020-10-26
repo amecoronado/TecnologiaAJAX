@@ -1,0 +1,79 @@
+/* 
+    Created on : sep-2020
+    Author     : ame_coronado
+*/
+
+/* -----------------PÁGINA 1----------------------*/
+ #Pagina1{
+    background-image: url(../FondoPag1.jpg);
+    background-size: 100%;
+    color: #ACA18C;
+}
+
+/* Estilo de la etiqueta "p", Usada para títulos*/
+p{
+    position: relative;
+    top: -5px;
+    left: 90px;
+    font-size: 3vw;
+    font-weight: bold;  
+}
+
+/* Estilo de la lista de temas*/
+#Temas{
+    font-size: 1.5vw;   
+}
+
+a.link{
+    position: relative;
+    top: 5px;
+    left: 90px;
+    font-size: 2vw; 
+}
+
+iframe{ 
+    width:400px; 
+    height:200px;
+    frameborder:3%; 
+    allow:"accelerometer;autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+}
+
+div.arriba_derecha img{
+    position: relative;
+    top: -750px; 
+    left: 450px;
+    width: 650px;
+    height: 400px;
+    display: block;
+
+}
+
+button.btvolver{
+    position: relative;
+    right: -725px;
+    top: -500px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #ACA18C;
+    border-radius: 6px; 
+}
+
+
+/*Se activa cuando el usuario se desplaza sobre un elemento con el cursor*/
+button.btvolver:hover{
+    color: #ACA18C;
+    background-color: #ffffff;
+  }
+
+/* -----------------PÁGINA 2----------------------*/
+#Pagina2{
+    align-content: center;
+    background-image: url(../FondoPag2.jpg);
+    background-size: 100%;
+    color: #ACA18C;
+}
+
+form{
+    text-align: center;
+}

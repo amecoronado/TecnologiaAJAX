@@ -1,0 +1,47 @@
+/* 
+    Created on : 28-sep-2020
+    Author     : ame_coronado
+*/
+
+/* Estilo de la etiqueta "body"*/
+body{
+    background-image: url(../Fondo.jpg); 
+    background-size: 100%;
+    font-family: sans-serif;
+    color: #ACA18C;     
+}
+
+/* Estilo de la clase "Titulo"*/
+div.Titulo{
+    text-align: center;
+    font-size: 5vw;
+    font-weight: bold;
+}
+/* Estilo de la etiqueta "hr" con id "Linea"*/
+#Linea{
+    line-height: 5px;
+    width: 30%;
+}
+/* Estilo de la clase "Subtítulo"*/
+div.Subtitulo{
+    text-align: center;
+    font-size: 1.5vw;
+    line-height: 3px;    
+}
+
+/* Estilo de la etiqueta "button" en index.html*/
+button {
+    position: relative;
+    right: -1025px;
+    top: 250px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #ACA18C;
+    border-radius: 6px; 
+}
+/*Se activa cuando el usuario se desplaza sobre un elemento con el cursor*/
+button:hover{
+    color: #ACA18C;
+    background-color: #ffffff;
+  }
