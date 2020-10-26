@@ -1,0 +1,27 @@
+/* 
+    Created on : 28-sep-2020
+    Author     : ame_coronado
+*/
+
+/* Estilo de la etiqueta "body"*/
+body{
+    background-color: #EBE7E7;
+    background-size: 100%;
+    font-family: sans-serif;
+    color: #ACA18C;
+    text-align: center;
+}
+
+/* Estilo de la clase "Titulo"*/
+h1{
+    text-align: center;
+    font-size: 3vw;
+    font-weight: bold;
+}
+
+/* Estilo de la clase "Subtítulo"*/
+h2{
+    text-align: center;
+    font-size: 1.5vw;
+    line-height: 3px;    
+}
