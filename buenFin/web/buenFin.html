@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd"
+      xml:lang="en">
+  <head>
+    <title>Pata de perro</title>
+    <script type="text/javascript" language = "javascript">
+        var xhr;
+
+        function buscarcomentario() {
+
+          if ( window.ActiveXObject ) 
+             xhr = new ActiveXObject( "Microsoft.XMLHttp" );      
+          else 
+            if ( ( window.XMLHttpRequest ) || ( typeof XMLHttpRequest ) != undefined )
+               xhr = new XMLHttpRequest();               
+            else {
+               alert( "El navegador no tiene soporte para AJAX." );
+               close( "buenFin.html" );
+             }
+        }
+
+        function Modelos() {
+
+            var listaArticulos = document.getElementById( "articulo" );
+            var CveArticulo= listaArticulos.options[ listaArticulos.selectedIndex ].value;
+                        
+            if ( ( CveArticulo > 0 ) && ( CveArticulo < 5 ) )  // S�lo hasta International
+               { 
+                 xhr.open( "GET", "Tienda?articulo=" + (CveArticulo - 1) + "&modelo=-1", true );
+                 xhr.onreadystatechange = procesaModelos;
+                 xhr.send( null );            
+               }
+        }
+                
+        function Imagen() {
+
+            var listaArticulos = document.getElementById( "articulo" );
+            var CveArticulo= listaArticulos.options[ listaArticulos.selectedIndex ].value;
+            
+            var listaModelos = document.getElementById( "modelo" );
+            var CveModelo= listaModelos.options[ listaModelos.selectedIndex ].value;
+                        
+            if ( CveArticulo == 0 ) 
+               { 
+                 listaArticulos.options[ 1 ].selected = true ;
+                 CveArticulo = 1 ;
+               }
+            if ( ( CveArticulo > 0 ) && ( CveArticulo < 5 ) && ( CveModelo > 0 ) )
+               {                               
+                 xhr.open( "GET", "Tienda?articulo=" + (CveArticulo - 1) + "&modelo=" + (CveModelo - 1), true );
+                 xhr.onreadystatechange = procesaImagen;
+                 xhr.send( null );
+               }            
+        }
+
+        function procesaModelos() {
+
+            if ( xhr.readyState == 4 )
+               {
+                 var Modelo = xhr.responseText ;             
+                 var listaModelos = document.getElementById( "modelo" );
+                 var i = 0 ;
+                 listaModelos.options.length = 0;
+                  
+                 listaModelos.options[ i++ ] = new Option('- Seleccione un Modelo -','0' ); 
+                 while ( Modelo.length > 2 )
+                    {
+                      var Opcion = Modelo.substring( 0,  Modelo.indexOf( '|' ) ) ;
+                      listaModelos.options[ i ] = new Option( Opcion , i ); 
+                      i++ ;
+                      Modelo = Modelo.substring( Modelo.indexOf( '|' ) + 1 , Modelo.length ) ;
+                    }
+                 
+//               prompt( 'Valor de los modelos: ', Modelo ) ;
+//               alert( 'Valor de los modelos: '+ Modelo ) ;
+//               document.write( Modelo ) ;
+
+               }
+        }
+
+        function procesaImagen() {  
+
+           if ( xhr.readyState == 4) 
+               {
+                 var resp = xhr.responseXML;     
+                 var Tienda = resp.getElementsByTagName( "Tienda" ).item( 0 );
+                 var elementos = Tienda.childNodes;
+                 var textoHTML = "<table border='1'>";    
+                 textoHTML += "<tr>";
+                 for( var i=0; i < elementos.length; i++ ) 
+                    textoHTML += "<th>" + elementos.item( i ).nodeName + "</th>";
+                 textoHTML += "</tr>";
+                 textoHTML += "<tr>";
+                 for( var i = 0; i < elementos.length; i++) 
+                   if ( elementos.item( i ).nodeName == "Imagen" )
+                       textoHTML += "<td>" + "<img src=" + elementos.item( i ).firstChild.nodeValue + "/> </td>" ;
+		   else
+                       textoHTML += "<td>" + elementos.item( i ).firstChild.nodeValue + "</td>";
+                textoHTML += "</tr></table>";
+                document.getElementById( "Precio" ).innerHTML = textoHTML;            
+              }                               
+        }  
+
+    </script>
+  </head>
+  <body background="FondoPP.jpg" onload="buscarcomentario()">
+
+     <center>
+      <img style="width:100%; height:100%; background-size: 100%;" alt="bottom" src = "Imagenes/Cabecera.jpg"/>
+      <h1>Bordado, estampado y estilo</h1>
+      <h3>Descuentos por el buen fin :)</h3>
+<!--	<p>    -->
+      <table width = "55%">
+          <tr><th><center><h4>Articulo</h4></center></th>
+              <th><center><h4>Modelo</h4></center></th>
+          </tr>
+          <tr>
+              <td>
+                  <select id = "articulo" size = "1" onchange = "Modelos();">
+                      <option value = "0">- Seleccione un articulo -</option>
+                      <option value = "1">Playeras</option>
+                      <option value = "2">Sudaderas</option>
+                      <option value = "3">Bolsas</option>
+                      
+                  </select>
+              </td>
+              <td>
+                  <select id = "modelo" size = "1" onchange = "Imagen();">
+                      <option value = "0">- Seleccione un Modelo -</option>
+                      <option value = "1">Corazon</option>
+                      <option value = "2">Dinosaurio</option>
+                      <option value = "3">Elefante</option>
+                      <option value = "4">Rostro</option>
+                  </select>
+              </td>
+              
+          </tr>
+          <tr>
+             <td colspan = "2"> 
+<!--                  <br/><br/> -->
+                <center> <div id = "Precio"></div> </center>      
+             </td> 
+          </tr>
+      </table>
+<!--      </p> --> 
+     </center>
+  </body>
+</html>
