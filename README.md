@@ -1,4 +1,3 @@
-Practica 3
+#Tecnologías AJAX
 
-+Servlets
-+Java Servr Pages
+Semestre 2021-1
