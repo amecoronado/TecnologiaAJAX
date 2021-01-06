@@ -1,0 +1,73 @@
+<!--
+Alumna: García Coronado América M.
+Num de cuenta: 314152389
+Tarea 3
+-->
+
+<!--root node: "Grupo Financiero Alfa"-->
+<GrupoFinancieroAlfa CEO="Daniel Duran">
+    <Empresa id="Cristal"> Cristal
+        <DireccionC id="RecursosHumanos"> RecursosHumanos
+            <AreaC id="Presentaciones">Presentaciones</AreaC>
+            <AreaC id="Nomina">Nomina</AreaC>
+            <AreaC id="EventosEspeciales"> EventosEspeciales
+                <Evento>Navidad</Evento>
+                <Evento>Dia de las madres</Evento>
+                <Evento>Aniversario Empresa</Evento>
+            </AreaC>
+        </DireccionC>
+        <DireccionC id="VentasDistribucion"> VentasDistribucion
+            <AreaC id="TraficoTransportes">TraficoTransportes</AreaC>
+            <AreaC id="Almacen" Tipo="Calidad">Almacen</AreaC>
+            <AreaC id="Facturacion">Facturacion</AreaC>
+        </DireccionC>
+        <DireccionC id="Finanzas"> Finanzas
+            <AreaC id="CuentasPago">CuentasPago</AreaC>
+            <AreaC id="CuentasCobro">CuentasCobro</AreaC>
+            <AreaC id="CuentasBancos">CuentasBancos
+                <Banco>Bancomer</Banco>
+                <Banco>Banamex</Banco>
+                <Banco>HSBC</Banco>
+            </AreaC>
+        </DireccionC>
+    </Empresa>
+    
+    <Empresa id="Manufactura"> Manufactura
+        <Direccion id="RH">RecursosHumanos</Direccion>
+        <Direccion id="VD">VentasDistribucion</Direccion>
+        <Direccion id="P"> Produccion
+            <AreaM id="MateriaPrima">MateriaPrima</AreaM>
+            <AreaM id="Almacen">Almacen</AreaM>
+            <AreaM id="Planta">Planta</AreaM>
+        </Direccion>
+        <Direccion id="M"> Mantenimiento
+            <AreaM id="Taller">Taller</AreaM>
+        </Direccion>
+    </Empresa>
+    
+    <Empresa id="Importadora"> Importadora
+        <DireccionImp>RecursosHumanos</DireccionImp>
+        <DireccionImp> Aduanas
+            <AreaI id="Importaciones">Importaciones</AreaI>
+        </DireccionImp>
+        <DireccionImp>Produccion</DireccionImp>
+    </Empresa>
+    
+    <Empresa id="Residuos" DirGral="Gabriela Duran"> Residuos
+        <DireccionRes id="Solidos">Solidos
+            <AreaRes id="Metales">Metales</AreaRes>
+            <AreaRes id="PapelCarton">Papel y Carton</AreaRes>
+        </DireccionRes>
+        <DireccionRes id="Liquidos">Liquidos
+            <AreaRes id="Inflamables">Inflamables</AreaRes>
+            <AreaRes id="Colorantes">Colorantes</AreaRes>
+            <AreaRes id="Corrosivos">Corrosivos</AreaRes>
+        </DireccionRes>
+        <DireccionRes id="Gases" Zona="CentroAmerica">Gases
+            <AreaRes id="Medicinal">Medicinal</AreaRes>
+            <AreaRes id="Industrial">Industrial</AreaRes>
+        </DireccionRes>
+    </Empresa>
+</GrupoFinancieroAlfa>
+
+    

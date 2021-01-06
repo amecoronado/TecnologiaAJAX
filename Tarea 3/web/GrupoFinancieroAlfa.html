@@ -1,0 +1,209 @@
+<!--
+Alumna: García Coronado América M.
+Num de cuenta: 314152389
+Tarea 3
+-->
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo"></p>
+        <script>
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    numEmpresas(this);
+                    //dirImportadora(this);
+                    //areasAduana(this);
+                    //tieneDirResiduosElect(this);
+                    //agregaSprinfield(this);
+                    //actividad6(this);
+                    //areasResiduos(this);
+                    //directoraResiduos(this);
+                    //zonaResiduos(this);
+                    //eventosCristal(this);
+                    //manejaCuentaCristal(this);
+                    //creaAlmacen(this);
+                }
+            };
+            xhttp.open("GET", "GrupoFinanciero.xml", true);
+            xhttp.send();
+            
+            //Numero de empresas que comforman el grupo financiero
+            function numEmpresas(xml) {
+                var xmlDoc = xml.responseXML;
+                int = 0;
+                var x = xmlDoc.getElementsByTagName("Empresa");
+                for (i = 0 ; i <x.length; i++) {
+                    int++;
+                }
+                document.getElementById("demo").innerHTML = "Numero de empresas: "+int;
+            }
+            
+            //Direcciones de la empresa Importadora
+            function dirImportadora(xml) {
+                 var x, xmlDoc;
+                 xmlDoc = xml.responseXML;
+                 txt = "";
+                 x = xmlDoc.getElementsByTagName("DireccionImp");
+                 for (i = 0; i < x.length; i++) {
+                     txt += x[i].childNodes[0].nodeValue + "<br>";
+                 }
+                 document.getElementById("demo").innerHTML = "Direcciones de la empresa Importadora: "+"<br>"+txt;
+             }
+             
+             //Areas de Direccion de Aduanas de la empresa Importadora
+             function areasAduana(xml){
+                 var x, xmlDoc;
+                 xmlDoc = xml.responseXML;
+                 txt = "";
+                 x = xmlDoc.getElementsByTagName("AreaI");
+                 for (i = 0; i < x.length; i++) {
+                     txt += x[i].childNodes[0].nodeValue + "<br>";
+                 }
+                 document.getElementById("demo").innerHTML = "Areas de la direccion de aduanas de la empresa Importadora: "+"<br>"+txt;
+             }
+             
+             //¿La empresa Residuos tiene una dirección de residuos electrónicos?
+             function tieneDirResiduosElect(xml){ 
+                 var x, txt, xmlDoc;
+                 xmlDoc = xml.responseXML;
+                 txt = "";
+                 x = xmlDoc.getElementsByTagName("DireccionRes");
+                 for (i = 0; i < x.length; i++) 
+                     txt += x[i].childNodes[0].nodeValue;
+                 
+                 document.getElementById("demo").innerHTML ="La empresa Residuos tiene una direccion de residuos electronicos? "+"<br>"+ txt.includes("ResiduosElectronicos");
+             }
+             
+             //Agrega al grupo financiero la empresa Sprinfield
+             function agregaSprinfield(xml){
+                 var x, y, xmlDoc;
+                 xmlDoc = xml.responseXML;
+                 newElement = xmlDoc.createElement("Empresa");
+                 x = xmlDoc.getElementsByTagName("GrupoFinancieroAlfa")[0];
+                 x.appendChild(newElement);
+                 newatt = xmlDoc.createAttribute("id");
+                 newatt.nodeValue = "Sprinfield";
+                 x = xmlDoc.getElementsByTagName("Empresa");
+                 x[4].setAttributeNode(newatt);
+                 
+                 txt="";
+                 y = xmlDoc.getElementsByTagName("Empresa");
+                 for(i=0; i<y.length; i++)
+                     txt += "Empresa: " + x[i].getAttribute("id") + "<br>";
+                 document.getElementById("demo").innerHTML =txt;
+            }
+            
+            //La dirección de gases de la empresa Cristal la absorbe la dirección de líquidos y luego la dirección de "Gases" desaparece.
+            function actividad6(xml){
+                var xmlDoc = xml.responseXML;
+                var x, z, newEle;
+                //Agregar "Medicinal"
+                newEle = xmlDoc.createElement("AreaRes");
+                newText = xmlDoc.createTextNode("Medicinal");
+                newEle.appendChild(newText);
+                x = xmlDoc.getElementsByTagName("DireccionRes")[1];
+                x.appendChild(newEle);
+                //Agregar "Industrial"
+                newEle2 = xmlDoc.createElement("AreaRes");
+                newText2 = xmlDoc.createTextNode("Industrial");
+                newEle2.appendChild(newText2);
+                x.appendChild(newEle2);
+                //Eliminar Direccion "Gases"
+                xmlDoc.getElementsByTagName("DireccionRes").length + "<br>";
+                z = xmlDoc.getElementsByTagName("DireccionRes")[2];
+                z.parentNode.removeChild(z);
+                
+                xlen = x.childNodes.length;
+                y = x.firstChild;
+                txt = "";
+                
+                x = xmlDoc.getElementsByTagName("AreaRes");
+                 for (i = 0; i < x.length; i++) {
+                     txt += x[i].childNodes[0].nodeValue + "<br>";
+                 }
+                document.getElementById("demo").innerHTML = "Areas de la empresa Residuos: "+"<br>"+txt;
+            }
+            
+            //Areas de la empresa Residuos
+            function areasResiduos(xml){
+                var x, xmlDoc;
+                 xmlDoc = xml.responseXML;
+                 txt = "";
+                 x = xmlDoc.getElementsByTagName("AreaRes");
+                 for (i = 0; i < x.length; i++) {
+                     txt += x[i].childNodes[0].nodeValue + "<br>";
+                 }
+                 document.getElementById("demo").innerHTML = "Areas de la empresa Residuos: "+"<br>"+txt;
+            }
+            
+            //Directora de la empresa Residuos
+            function directoraResiduos(xml){
+                var x, xmlDoc;
+                xmlDoc = xml.responseXML;
+                x = xmlDoc.getElementsByTagName("Empresa");
+                
+                txt="";
+                for(i=0; i<x.length; i++)
+                    if(x[i].getAttribute("DirGral")!= null)
+                        txt += "Directora: " + x[i].getAttribute("DirGral") + "<br>";
+                document.getElementById("demo").innerHTML =txt;
+            }
+            
+            //Zona que atiende la empresa de Residuos área gases
+            function zonaResiduos(xml){
+                var x, xmlDoc;
+                xmlDoc = xml.responseXML;
+                x = xmlDoc.getElementsByTagName("DireccionRes");
+                
+                txt="";
+                for(i=0; i<x.length; i++)
+                    if(x[i].getAttribute("Zona")!= null)
+                        txt += "Zona: " + x[i].getAttribute("Zona") + "<br>";
+                document.getElementById("demo").innerHTML =txt;
+            }
+            
+            //Eventos que administra RH de la empresa Cristal
+            function eventosCristal(xml){
+                var x, xmlDoc;
+                xmlDoc = xml.responseXML;
+                x = xmlDoc.getElementsByTagName("Evento");
+                
+                txt="";
+                for(i=0; i<x.length; i++)
+                    if(x[i].childNodes[0].nodeValue!= null)
+                        txt += "Evento: " + x[i].childNodes[0].nodeValue + "<br>";
+                document.getElementById("demo").innerHTML ="Eventos de la empresa Cristal"+"<br>"+txt;
+            }
+            
+            //¿Cristal maneja la cuenta de ScotiankBank?
+            function manejaCuentaCristal(xml){
+                var x, txt, xmlDoc;
+                 xmlDoc = xml.responseXML;
+                 txt = "";
+                 x = xmlDoc.getElementsByTagName("Banco");
+                 for (i = 0; i < x.length; i++) 
+                     txt += x[i].childNodes[0].nodeValue;
+                 document.getElementById("demo").innerHTML = "El area de Cuentas Bancarias de la empresa Cristal maneja la cuenta del Banco Scotiank? "+"<br>"+txt.includes("ScotiankBank");
+            }
+            
+            //Crea nuevo alamacen de la empresa Cristal
+            function creaAlmacen(xml){
+                var x, xmlDoc;
+                xmlDoc = xml.responseXML;
+                newElement = xmlDoc.createElement("almacen");
+                x = xmlDoc.getElementsByTagName("Empresa")[0]
+                x.appendChild(newElement);
+                newatt = xmlDoc.createAttribute("id");
+                newatt.nodeValue = "Reacondicionado";
+                x = xmlDoc.getElementsByTagName("Empresa");
+                x[0].setAttributeNode(newatt);
+                 
+                txt="";
+                y = xmlDoc.getElementsByTagName("Empresa");
+                txt = "Almacen: " + x[0].getAttribute("id") + "<br>";
+                document.getElementById("demo").innerHTML =txt;
+            }
+        </script>
+    </body>
+</html>
